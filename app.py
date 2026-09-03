@@ -5,10 +5,7 @@ import numpy as np
 
 st.title("Face Detection")
 
-upload_image = st.file_uploader(
-    "Upload the image",
-    type=["jpg", "jpeg", "png"]
-)
+upload_image = st.file_uploader("Upload the image", type=["jpg", "jpeg", "png"])
 
 if upload_image is not None:
     image = Image.open(upload_image)
@@ -25,10 +22,7 @@ if upload_image is not None:
     gray = cv2.cvtColor(image_cv, cv2.COLOR_BGR2GRAY)
 
     # Load Haar Cascade
-    face_cascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades +
-        "haarcascade_frontalface_default.xml"
-    )
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
     # Detect faces
     faces = face_cascade.detectMultiScale(
@@ -40,11 +34,11 @@ if upload_image is not None:
     # Draw rectangle
     for (x, y, w, h) in faces:
         cv2.rectangle(
-            image_cv,
-            (x, y),
-            (x + w, y + h),
-            (255, 0, 0),
-            2
+            image_cv, #Target image
+            (x, y), #Top-left corner point
+            (x + w, y + h), #Bottom-right corner point
+            (255, 0, 0), #Line color (BGR)
+            2 #Line thickness
         )
 
     # Convert BGR to RGB
